@@ -1,0 +1,155 @@
+ScreenManager:
+    LoginScreen:
+    ConsultScreen:
+
+<LoginScreen>
+
+    name: "login"
+
+    FloatLayout:
+
+        MDTopAppBar:
+
+            title: "Login"
+            pos_hint: {'top': 1}
+            elevation: 5
+            left_action_items: [["menu", lambda x: nav_drawer.set_state('open')]]
+            right_action_items: [["help", lambda x: app.callback()]]
+
+
+        Image:
+            source: 'images/user.png'
+            size_hint: (0.5, 0.5)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+
+        MDLabel:
+            text: "Seja bem vindo!"
+            font_style: 'H5'
+            bold: True
+            halign: "center"
+            pos_hint: {'center_x': 0.5, 'center_y': 0.60}
+
+        MDLabel:
+            text: "Faça o login para continuar."
+            font_style: 'Caption'
+            halign: "center"
+            pos_hint: {'center_x': 0.5, 'center_y': 0.56}
+
+        MDTextField:
+            id: email
+            hint_text: "Email"
+            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+            size_hint_x: .8
+            icon_right: 'email'
+            icon_right_color: app.theme_cls.primary_color
+
+        MDTextField:
+            id: senha
+            hint_text: "Senha"
+            pos_hint: {'center_x': 0.5, 'center_y': 0.37}
+            size_hint_x: .8
+            icon_right: 'lock'
+            password: True
+            icon_right_color: app.theme_cls.primary_color
+
+
+        MDFillRoundFlatButton:
+            text: 'Entrar'
+            font_size: 40
+            elevation: 5
+            pos_hint: {'center_x': 0.5, 'center_y': 0.22}
+            text_color: 1,1,1,1
+            size_hint_x: .8
+            on_release: root.login()
+
+
+        MDFillRoundFlatButton:
+            text: 'Cadastrar'
+            font_size: 40
+            elevation: 5
+            pos_hint: {'center_x': 0.5, 'center_y': 0.14}
+            text_color: 1,1,1,1
+            size_hint_x: .8
+            on_release: root.cria_usuario()
+
+
+
+        MDTextButton:
+            text: 'Esqueci minha senha'
+            font_size: 30
+            pos_hint: {'center_x': 0.5, 'center_y': 0.07}
+            on_release: root.send_password_reset_email()
+
+    MDNavigationDrawer:
+        id: nav_drawer
+        orientation: 'vertical'
+        Image:
+            source: 'images/logo1.png'
+            size_hint: None,None
+            size: '50dp','50dp'
+            pos_hint: {'center_x': 0.5}
+        MDLabel:
+            text: "Vagas"
+            adaptive_height: True
+            halign: 'center'
+            font_size: 30
+
+        MDNavigationDrawerMenu:
+
+            MDNavigationDrawerItem:
+                icon: 'logout'
+                text: "Fechar Aplicativo"
+                on_release: exit()
+
+<ConsultScreen>
+
+    name: "consulta"
+
+    FloatLayout:
+
+        MDTopAppBar:
+
+            title: "Consulta"
+            pos_hint: {'top': 1}
+            elevation: 5
+            left_action_items: [["menu", lambda x: nav_drawer.set_state('open')]]
+            right_action_items: [["help", lambda x: app.callback()]]
+
+
+        Image:
+            source: 'images/user.png'
+            size_hint: (0.5, 0.5)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.75}
+
+
+        MDFillRoundFlatButton:
+            text: 'Analisar'
+            font_size: 40
+            elevation: 5
+            pos_hint: {'center_x': 0.5, 'center_y': 0.22}
+            text_color: 1,1,1,1
+            size_hint_x: .8
+            on_release: root.analisar()
+
+
+
+    MDNavigationDrawer:
+        id: nav_drawer
+        orientation: 'vertical'
+        Image:
+            source: 'images/logo1.png'
+            size_hint: None,None
+            size: '50dp','50dp'
+            pos_hint: {'center_x': 0.5}
+        MDLabel:
+            text: "Vagas"
+            adaptive_height: True
+            halign: 'center'
+            font_size: 30
+
+        MDNavigationDrawerMenu:
+
+            MDNavigationDrawerItem:
+                icon: 'logout'
+                text: "Sair"
+                on_release: root.manager.current = 'login'
